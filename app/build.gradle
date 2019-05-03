@@ -1,6 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+kapt {
+    generateStubs = true
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -12,21 +24,88 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            releaseConfig {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
-        release {
+        debug{
+            buildConfigField "String", "BASE_URL", "\"<DEV_URL_HERE>\""
             minifyEnabled false
+        }
+        release {
+            buildConfigField "String", "BASE_URL", "\"<PRODUCTION_URL_HERE>\""
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin
-    implementation deps.support.appCompat
-    implementation deps.support.core_ktx
+    implementation deps.androidX.appCompat
+    implementation deps.androidX.core_ktx
+    implementation deps.androidX.cardView
+    implementation deps.androidX.recyclerView
     implementation deps.extras.material
+    implementation deps.androidX.navigationUi
+    implementation deps.androidX.navigationFragment
 
+    //Live data, ViewModel
+    implementation deps.archComponents.lifecycleExt
+    implementation deps.archComponents.lifecycleCommonJava8
+    implementation deps.archComponents.lifecycleReactiveStreams
+
+    //Retrofit
+    implementation deps.networking.retrofit
+    implementation deps.networking.converterGson
+    implementation deps.networking.scalars
+    implementation deps.networking.rxAdapter
+    implementation deps.networking.gson
+    implementation deps.networking.okHttp
+    implementation deps.networking.okHttpInterceptor
+
+    //RxJava
+    implementation deps.archComponents.rxJava
+    implementation deps.archComponents.rxAndroid
+
+    //Room
+    implementation deps.archComponents.roomRxjava
+    implementation deps.archComponents.room
+    kapt deps.archComponents.roomCompiler
+
+    //Dagger
+    implementation deps.archComponents.dagger
+    implementation deps.archComponents.daggerAndroid
+    implementation deps.archComponents.daggerAndroidSupport
+    kapt deps.archComponents.daggerCompiler
+    kapt deps.archComponents.daggerAndroidProcessor
+
+    //Extras
+    implementation(deps.extras.crashlytics){
+        transitive = true
+    }
+
+    //Unit Testing
     testImplementation deps.testing.jUnit
     androidTestImplementation deps.testing.testRunner
     androidTestImplementation deps.testing.espressoCore

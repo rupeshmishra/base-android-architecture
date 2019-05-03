@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath deps.gradlePlugin
         classpath deps.kotlinPlugin
+        classpath deps.safeArgsPlugin
     }
 }
 
