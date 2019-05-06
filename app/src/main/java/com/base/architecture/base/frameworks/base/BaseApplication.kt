@@ -1,4 +1,4 @@
-package com.base.architecture.base
+package com.base.architecture.base.frameworks.base
 
 import com.base.architecture.base.di.AppComponent
 import dagger.android.support.DaggerApplication

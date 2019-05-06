@@ -1,6 +1,8 @@
-package com.base.architecture.base.di.modules
+package com.base.architecture.data.di.modules
 
 import android.content.Context
+import com.base.architecture.data.prefs.SharedPrefs
+import com.base.architecture.domain.repositories.PrefsRepo
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

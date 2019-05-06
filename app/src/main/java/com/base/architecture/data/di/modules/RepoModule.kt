@@ -1,4 +1,4 @@
-package com.base.architecture.base.di.modules
+package com.base.architecture.data.di.modules
 
 import dagger.Module
 

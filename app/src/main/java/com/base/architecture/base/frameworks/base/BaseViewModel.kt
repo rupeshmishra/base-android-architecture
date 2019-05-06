@@ -1,4 +1,4 @@
-package com.deividasstr.ui.base.framework.base
+package com.base.architecture.base.frameworks.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

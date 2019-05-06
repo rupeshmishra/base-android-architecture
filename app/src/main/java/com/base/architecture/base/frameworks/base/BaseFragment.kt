@@ -1,4 +1,4 @@
-package com.deividasstr.ui.base.framework.base
+package com.base.architecture.base.frameworks.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
-import com.base.architecture.base.BaseActivity
 import com.base.architecture.base.frameworks.extensions.observe
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

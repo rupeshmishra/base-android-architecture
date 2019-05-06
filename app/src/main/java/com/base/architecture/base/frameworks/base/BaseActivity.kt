@@ -1,4 +1,4 @@
-package com.base.architecture.base
+package com.base.architecture.base.frameworks.base
 
 import android.view.View
 import androidx.fragment.app.FragmentActivity

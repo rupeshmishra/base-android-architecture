@@ -1,18 +1,19 @@
-package com.deividasstr.ui.base.di.modules
+package com.base.architecture.base.di.modules
 
 import android.app.Application
 import android.content.Context
-import com.base.architecture.base.di.modules.DbModule
-import com.base.architecture.base.di.modules.NetworkModule
-import com.base.architecture.base.di.modules.RepoModule
-import com.base.architecture.base.di.modules.SharedPrefsModule
-import com.deividasstr.ui.base.di.viewmodel.ViewModelModule
+import com.base.architecture.data.di.modules.DbModule
+import com.base.architecture.data.di.modules.NetworkModule
+import com.base.architecture.data.di.modules.RepoModule
+import com.base.architecture.data.di.modules.SharedPrefsModule
+import com.base.architecture.domain.di.modules.UseCaseModule
+import com.base.architecture.base.di.viewmodel.ViewModelModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module(
-    includes = [(BackgroundModule::class),
+    includes = [
         (DbModule::class),
         (NetworkModule::class),
         (RepoModule::class),

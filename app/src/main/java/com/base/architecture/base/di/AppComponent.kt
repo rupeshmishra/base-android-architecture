@@ -1,9 +1,9 @@
 package com.base.architecture.base.di
 
 import android.app.Application
-import com.base.architecture.base.di.modules.NetworkModule
+import com.base.architecture.data.di.modules.NetworkModule
 import com.deividasstr.ui.base.di.modules.ActivityModule
-import com.deividasstr.ui.base.di.modules.AppModule
+import com.base.architecture.base.di.modules.AppModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
