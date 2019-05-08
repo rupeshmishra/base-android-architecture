@@ -7,6 +7,9 @@ buildscript {
         classpath deps.kotlinPlugin
         classpath deps.safeArgsPlugin
     }
+    repositories {
+        google()
+    }
 }
 
 allprojects {

@@ -13,6 +13,10 @@ import com.base.architecture.ui.base.frameworks.extensions.observe
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : DaggerFragment() {
 
     abstract fun getViewModelClass(): Class<VM>
@@ -30,7 +34,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : DaggerFr
         viewModel = ViewModelProviders.of(this, viewModelFactory)[getViewModelClass()]
         observe(viewModel.errorMessage) { it ->
             it.getContentIfNotHandled()?.let {
-                (activity as BaseActivity).alert(it.messageStringRes)
+                (activity as BaseActivity).alert(it.messageString)
             }
         }
     }

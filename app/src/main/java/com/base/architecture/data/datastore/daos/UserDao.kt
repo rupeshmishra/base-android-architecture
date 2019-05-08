@@ -1,5 +1,7 @@
 package com.base.architecture.data.datastore.daos
-
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

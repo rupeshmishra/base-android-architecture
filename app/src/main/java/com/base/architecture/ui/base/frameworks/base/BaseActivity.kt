@@ -1,5 +1,6 @@
 package com.base.architecture.ui.base.frameworks.base
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -9,15 +10,24 @@ import com.base.architecture.ui.base.frameworks.extensions.alert
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    abstract fun liftNavBar()
+    abstract fun getContentViewId(): Int
     abstract fun getRootLayoutContainer(): View
 
     fun alert(stringRes: Int) { getRootLayoutContainer().alert(stringRes) }
     fun alert(string: String) { getRootLayoutContainer().alert(string) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(getContentViewId())
+    }
 }
 
 inline fun <reified T : ViewModel> FragmentActivity.viewModel(

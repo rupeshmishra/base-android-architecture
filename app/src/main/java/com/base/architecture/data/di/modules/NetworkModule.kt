@@ -1,5 +1,7 @@
 package com.base.architecture.data.di.modules
 
+import com.base.architecture.data.networking.ApplicationApis
+import com.base.architecture.data.networking.services.UserAccountService
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -8,6 +10,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import javax.inject.Singleton
+
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
 
 @Module
 class NetworkModule(private val baseUrl: String) {
@@ -50,4 +56,9 @@ class NetworkModule(private val baseUrl: String) {
     /**
      * Provide Retrofit API's service from here
      */
+    @Singleton
+    @Provides
+    fun provideUserAccountService(retrofit: Retrofit): UserAccountService{
+        return UserAccountService(retrofit.create(ApplicationApis::class.java))
+    }
 }

@@ -6,6 +6,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 fun View.alert(@StringRes message: Int) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
 }

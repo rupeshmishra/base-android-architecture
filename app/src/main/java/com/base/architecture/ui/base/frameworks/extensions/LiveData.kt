@@ -1,7 +1,14 @@
 package com.base.architecture.ui.base.frameworks.extensions
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
+import io.reactivex.*
+
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 /**
  * Sets the value to the result of a function that is called when both `LiveData`s have data
  * or when they receive updates after that.
@@ -26,4 +33,24 @@ fun <T, A, B> LiveData<A>.combineAndCompute(other: LiveData<B>, onChange: (A, B)
     result.addSource(other) { source2emitted = true; mergeF.invoke() }
 
     return result
+}
+
+fun <T> Flowable<T>.toLiveData() :  LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this)
+}
+
+fun <T> Observable<T>.toLiveData(backPressureStrategy: BackpressureStrategy) :  LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this.toFlowable(backPressureStrategy))
+}
+
+fun <T> Single<T>.toLiveData() :  LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
+}
+
+fun <T> Maybe<T>.toLiveData() :  LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
+}
+
+fun <T> Completable.toLiveData() :  LiveData<T> {
+    return LiveDataReactiveStreams.fromPublisher(this.toFlowable())
 }

@@ -1,3 +1,7 @@
 package com.base.architecture.utils
 
-class StringResException(val messageStringRes: Int) : Throwable()
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
+class StringResException(val messageString: String) : Throwable()

@@ -5,6 +5,10 @@ import com.base.architecture.ui.features.signin.SignInFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 @Module
 internal abstract class FragmentModule {
 
