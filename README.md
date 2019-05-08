@@ -1,4 +1,4 @@
-# base-android-architecture
+# Clean android architecture
 A clean architecture skeleton project written in Kotlin using MVVM, Dagger2, RxJava and that can be extended for any Android Project.
 
 The skeleton project uses following frameworks and APIs - 
