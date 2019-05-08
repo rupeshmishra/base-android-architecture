@@ -4,6 +4,10 @@ import androidx.room.TypeConverter
 import android.net.Uri
 import java.util.*
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 class Converters {
     @TypeConverter
     fun fromTimestamp(value: Long?): Date? {

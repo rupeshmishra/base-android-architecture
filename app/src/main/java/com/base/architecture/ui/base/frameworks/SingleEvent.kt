@@ -1,5 +1,9 @@
 package com.base.architecture.ui.base.frameworks
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 open class SingleEvent<out T>(private val content: T) {
 
     var hasBeenHandled = false

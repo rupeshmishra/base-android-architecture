@@ -8,9 +8,13 @@ import com.base.architecture.utils.StringResException
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 abstract class BaseViewModel : ViewModel() {
 
-    protected var _errorMessage = MediatorLiveData<SingleEvent<StringResException>>()
+    private var _errorMessage = MediatorLiveData<SingleEvent<StringResException>>()
 
     val errorMessage: LiveData<SingleEvent<StringResException>>
         get() = _errorMessage

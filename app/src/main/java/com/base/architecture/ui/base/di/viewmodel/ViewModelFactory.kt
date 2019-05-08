@@ -6,6 +6,10 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 @Singleton
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory

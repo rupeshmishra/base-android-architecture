@@ -7,6 +7,10 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 @Module
 class SharedPrefsModule {
 

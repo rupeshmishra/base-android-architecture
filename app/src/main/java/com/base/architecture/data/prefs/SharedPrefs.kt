@@ -6,6 +6,11 @@ import com.base.architecture.data.utils.StrictModePermitter.permitDiskReads
 import com.base.architecture.domain.repositories.PrefsRepo
 import javax.inject.Singleton
 
+
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
+
 @Singleton
 class SharedPrefs(private val ctx: Context) : PrefsRepo {
 

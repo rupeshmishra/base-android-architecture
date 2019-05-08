@@ -2,10 +2,14 @@ package com.base.architecture.data.di.modules
 
 import android.content.Context
 import com.base.architecture.data.datastore.AppDB
+import com.base.architecture.data.datastore.daos.UserDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Created by Rupesh on 5/8/2019.
+ */
 @Module
 class DbModule {
 
@@ -20,8 +24,7 @@ class DbModule {
 
     @Singleton
     @Provides
-    fun provideUserDao(appDB: AppDB){
+    fun provideUserDao(appDB: AppDB): UserDao{
         return appDB.userDao()
     }
-
 }
