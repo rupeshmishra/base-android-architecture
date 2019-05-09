@@ -21,6 +21,7 @@ versions.material = '1.0.0-beta01'
 versions.jUnit = '4.12'
 versions.testRunner = '1.1.0-alpha4'
 versions.espressoCore = '3.1.0-alpha4'
+versions.leakCanary = '2.0-alpha-1'
 
 def deps = [:]
 
@@ -81,6 +82,7 @@ deps.networking = networking
 def extras = [:]
 extras.material = "com.google.android.material:material:$versions.material"
 extras.crashlytics = "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics"
+extras.leakCanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
 deps.extras = extras
 
 def testing = [:]

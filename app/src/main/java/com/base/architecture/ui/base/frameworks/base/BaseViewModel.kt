@@ -1,5 +1,6 @@
 package com.base.architecture.ui.base.frameworks.base
 
+import android.os.Message
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -14,10 +15,14 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
 
-    private var _errorMessage = MediatorLiveData<SingleEvent<StringResException>>()
+    private var _errorMessage = MediatorLiveData<SingleEvent<Throwable>>()
+    private var _userMessage = MediatorLiveData<SingleEvent<String>>()
 
-    val errorMessage: LiveData<SingleEvent<StringResException>>
+    val errorMessage: LiveData<SingleEvent<Throwable>>
         get() = _errorMessage
+
+    val userMessage: LiveData<SingleEvent<String>>
+        get() = _userMessage
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -33,7 +38,12 @@ abstract class BaseViewModel : ViewModel() {
         clearDisposables()
     }
 
-    protected fun setError(error: StringResException) {
+    protected fun setError(error: Throwable) {
         _errorMessage.postValue(SingleEvent(error))
     }
+
+    public fun setMessage(message: String){
+        _userMessage.postValue(SingleEvent(message))
+    }
+
 }

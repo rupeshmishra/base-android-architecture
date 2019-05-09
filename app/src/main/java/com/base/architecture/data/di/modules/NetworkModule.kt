@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -40,7 +41,7 @@ class NetworkModule(private val baseUrl: String) {
     @Provides
     fun provideRetrofit(interceptors: ArrayList<Interceptor>): Retrofit {
         val clientBuilder = OkHttpClient.Builder()
-        if (!interceptors.isEmpty()) {
+        if (interceptors.isNotEmpty()) {
             interceptors.forEach { interceptor ->
                 clientBuilder.addInterceptor(interceptor)
             }
@@ -49,6 +50,7 @@ class NetworkModule(private val baseUrl: String) {
         return Retrofit.Builder()
             .client(clientBuilder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl)
             .build()
     }
