@@ -34,7 +34,12 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : DaggerFr
         viewModel = ViewModelProviders.of(this, viewModelFactory)[getViewModelClass()]
         observe(viewModel.errorMessage) { it ->
             it.getContentIfNotHandled()?.let {
-                (activity as BaseActivity).alert(it.messageString)
+                it.message?.let { it1 -> (activity as BaseActivity).alert(it1) }
+            }
+        }
+        observe(viewModel.userMessage){ event ->
+            event.getContentIfNotHandled()?.let {
+                (activity as BaseActivity).alert(it)
             }
         }
     }

@@ -39,11 +39,11 @@ android {
     }
     buildTypes {
         debug{
-            buildConfigField "String", "BASE_URL", "\"<DEV_URL_HERE>\""
+            buildConfigField "String", "BASE_URL", "\"https://my-json-server.typicode.com\""
             minifyEnabled false
         }
         release {
-            buildConfigField "String", "BASE_URL", "\"<PRODUCTION_URL_HERE>\""
+            buildConfigField "String", "BASE_URL", "\"https://my-json-server.typicode.com\""
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -66,7 +66,6 @@ dependencies {
     implementation deps.androidX.core_ktx
     implementation deps.androidX.cardView
     implementation deps.androidX.recyclerView
-    implementation deps.extras.material
     implementation deps.androidX.navigationUi
     implementation deps.androidX.navigationFragment
 
@@ -101,6 +100,8 @@ dependencies {
     kapt deps.archComponents.daggerAndroidProcessor
 
     //Extras
+    implementation deps.extras.material
+    debugImplementation deps.extras.leakCanary
     implementation(deps.extras.crashlytics){
         transitive = true
     }
