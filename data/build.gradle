@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //kotlin
+    implementation deps.kotlin
+    implementation project(':domain')
+
+    //Retrofit
+    api deps.networking.retrofit
+    api deps.networking.converterGson
+    api deps.networking.scalars
+    api deps.networking.rxAdapter
+    api deps.networking.gson
+    api deps.networking.okHttp
+    api deps.networking.okHttpInterceptor
+
+    //Room
+    implementation deps.archComponents.roomRxjava
+    implementation deps.archComponents.room
+    kapt deps.archComponents.roomCompiler
+
+    //Dagger
+    implementation deps.archComponents.dagger
+    implementation deps.archComponents.daggerAndroid
+    implementation deps.archComponents.daggerAndroidSupport
+    kapt deps.archComponents.daggerCompiler
+    kapt deps.archComponents.daggerAndroidProcessor
+
+}

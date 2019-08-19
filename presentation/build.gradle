@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+kapt {
+    generateStubs = true
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    defaultConfig {
+        applicationId "com.base.architecture"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            releaseConfig {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        debug{
+            buildConfigField "String", "BASE_URL", "\"https://my-json-server.typicode.com\""
+            minifyEnabled false
+        }
+        release {
+            buildConfigField "String", "BASE_URL", "\"https://my-json-server.typicode.com\""
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+    api project(':data')
+
+    implementation deps.kotlin
+    implementation deps.androidX.appCompat
+    implementation deps.androidX.core_ktx
+    implementation deps.androidX.cardView
+    implementation deps.androidX.recyclerView
+    implementation deps.androidX.navigationUi
+    implementation deps.androidX.navigationFragment
+
+    //Live data, ViewModel
+    implementation deps.archComponents.lifecycleExt
+    implementation deps.archComponents.lifecycleCommonJava8
+    implementation deps.archComponents.lifecycleReactiveStreams
+
+    //RxJava
+    implementation deps.archComponents.rxJava
+    implementation deps.archComponents.rxAndroid
+
+    //Dagger
+    implementation deps.archComponents.dagger
+    implementation deps.archComponents.daggerAndroid
+    implementation deps.archComponents.daggerAndroidSupport
+    kapt deps.archComponents.daggerCompiler
+    kapt deps.archComponents.daggerAndroidProcessor
+
+    //Extras
+    implementation deps.extras.material
+    debugImplementation deps.extras.leakCanary
+    implementation(deps.extras.crashlytics){
+        transitive = true
+    }
+
+    //Unit Testing
+    testImplementation deps.testing.jUnit
+    androidTestImplementation deps.testing.testRunner
+    androidTestImplementation deps.testing.espressoCore
+}
